@@ -4,6 +4,10 @@ import "./css/App.css";
 function App() {
   const [text, setText] = useState("");
 
+  function handleGenerate() {
+    console.log(text);
+  }
+
   return (
     <main>
       <h1>Text-to-Speech</h1>
@@ -18,7 +22,9 @@ function App() {
 
       <br />
 
-      <button id="generateButton">Generate</button>
+      <button id="generateButton" onClick={handleGenerate}>
+        Generate
+      </button>
     </main>
   );
 }
