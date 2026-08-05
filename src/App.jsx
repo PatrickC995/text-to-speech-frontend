@@ -3,7 +3,6 @@ import "./css/App.css";
 
 function App() {
   const [text, setText] = useState("");
-
   async function handleGenerate() {
     const response = await fetch("http://localhost:8080/generate", {
       method: "POST",
@@ -14,8 +13,21 @@ function App() {
         text: text,
       }),
     });
+
+    if (!response.ok) {
+      console.error("Request failed:", response.status);
+      return;
+    }
+
     const audioBlob = await response.blob();
+
     console.log(audioBlob);
+
+    const audioUrl = URL.createObjectURL(audioBlob);
+
+    const audio = new Audio(audioUrl);
+
+    audio.play();
   }
 
   return (
